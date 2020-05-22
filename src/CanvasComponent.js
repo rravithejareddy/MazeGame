@@ -3,9 +3,7 @@ import Mushroom from './MushRoom.png';
 import PaperMario from './PaperMario.png';
 import Loadimage from 'image-promise';
 
-
 class CanvasComponent extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -14,9 +12,8 @@ class CanvasComponent extends React.Component {
             moves: 0,
             MushRoomsArray: []
         }
-
-
     }
+
     componentDidMount() {
         this.updateCanvas(400, 400);
         this.state.MushRoomsArray = this.createMushRooms()
@@ -26,6 +23,7 @@ class CanvasComponent extends React.Component {
 
     createMushRooms() {
         let MushRooms = [];
+
         for (let i = 0; i < 11; i++) {
             let minHeight = 0;
             let maxHeight = 10;
@@ -41,11 +39,13 @@ class CanvasComponent extends React.Component {
 
         return MushRooms;
     }
+
     checkForRepeat(x, y, array) {
         let minHeight = 0;
         let maxHeight = 10;
         let minWidth = 0;
         let maxWidth = 10;
+
         for (let j = 0; j < array.length; j++) {
             if (array[j].x == x && array[j].y == y) {
                 array.splice(j, 1);
@@ -55,12 +55,15 @@ class CanvasComponent extends React.Component {
                 array.push(r);
             }
         }
+
         return array;
     }
+
     updateCanvas(w, h) {
         const ctx = this.refs.canvas.getContext('2d');
         ctx.canvas.width = w
         ctx.canvas.height = h
+
         for (let x = 0; x <= w; x += 40) {
             for (var y = 0; y <= h; y += 40) {
                 ctx.moveTo(x, 0)
@@ -78,29 +81,32 @@ class CanvasComponent extends React.Component {
             const image = new Image();
             image.src = Mushroom;
             const ctx = this.refs.canvas.getContext('2d');
+
             Loadimage(image).then(function (img) {
                 ctx.drawImage(img, array[i].x, array[i].y);
-            })
-
+            });
         }
     }
+
     createPaperMario(moveType) {
         const image = new Image();
         image.src = PaperMario;
         let x = this.state.MushRoomsArray[0].x;
         let y = this.state.MushRoomsArray[0].y;
+
         this.setState({ x: x, y: y })
         const ctx = this.refs.canvas.getContext('2d');
         Loadimage(image).then(function (img) {
             ctx.drawImage(img, x, y);
         })
-
     }
+
     component(moveType) {
         const image = new Image();
         let x = this.state.x;
         let y = this.state.y;
         let moves = this.state.moves;
+        let array = this.state.MushRoomsArray;
 
         image.src = PaperMario;
         if (moveType == 'up') {
@@ -131,8 +137,9 @@ class CanvasComponent extends React.Component {
         image.onload = function () {
             ctx.drawImage(image, x, y);
         }
+
         this.updateCanvas(400, 400);
-        let array = this.state.MushRoomsArray;
+
         for (var i = 1; i < array.length; i++) {
             if (array[i].x == x && array[i].y == y) {
                 array.splice(i, 1);
@@ -154,8 +161,8 @@ class CanvasComponent extends React.Component {
                 <canvas ref="canvas" />
                 <div style={{ textAlign: 'center', width: 480 }}>
                     <button onClick={this.component.bind(this, 'up')}>UP</button><br /><br />
-                    <button onClick={this.component.bind(this, 'left')}>LEFT</button>
-                    <button onClick={this.component.bind(this, 'right')}>RIGHT</button><br /><br />
+                    <button onClick={this.component.bind(this, 'left')} style={{ marginRight: 40 }}>LEFT</button>
+                    <button onClick={this.component.bind(this, 'right')} style={{ marginLeft: 40 }}>RIGHT</button><br /><br />
                     <button onClick={this.component.bind(this, 'down')}>DOWN</button>
                 </div>
             </div>

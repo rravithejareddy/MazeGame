@@ -6,9 +6,9 @@ class App extends Component {
   constructor(props) {
     super(props);
   }
+
   drawGrid(w, h) {
     const ctx = this.refs.grid.getContext('2d')
-
     ctx.canvas.width = w
     ctx.canvas.height = h
     for (var x = 0; x <= w; x += 20) {
@@ -22,6 +22,7 @@ class App extends Component {
       }
     }
   }
+  
   render() {
     this.drawGrid(800, 400)
     return (
