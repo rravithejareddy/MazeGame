@@ -32,7 +32,7 @@ class CanvasComponent extends React.Component {
             let x = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight) * 40;
             let y = Math.floor(Math.random() * (maxWidth - minWidth + 1) + minWidth) * 40;
             let r = { x: x, y: y };
-            console.log(MushRooms)
+      
             this.checkForRepeat(x, y, MushRooms);
             MushRooms.push(r);
         }
