@@ -1,4 +1,4 @@
-CLone or Download app.
+Clone or Download app.
 
 Step 1:  Open command prompt, move to project location
 Example: Windows: cd C:\Users\Downloads\HackerBayTask
